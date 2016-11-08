@@ -4,6 +4,7 @@ Imagine that we are storing invoices in an Apache Cassandra database.
 
 Assume a keyspace that has two tables. 
 One allows queries by the receiver of the invoice items and trailer
+	
 	CREATE TABLE IF NOT EXISTS "invoice_by_destination" (
 		invoice_id TIMEUUID,
 		json_doc TEXT,
@@ -12,6 +13,7 @@ One allows queries by the receiver of the invoice items and trailer
 
 
 Another stores the JSON document
+	
 	CREATE TABLE IF NOT EXISTS "invoice_doc" (
 		invoice_id TIMEUUID,
 		destination_name TEXT,
