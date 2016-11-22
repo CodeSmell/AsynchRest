@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+  <!-- Bootstrap listener to start up and shut down Spring's root WebApplicationContext -->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+  <!-- 
+    WebApplicationContext implementation which accepts annotated classes as input
+    including @Configuration, @Component, and @Inject
+  -->
+  <context-param>
+    <param-name>contextClass</param-name>
+    <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+  </context-param>
+
+  <!-- 
+    The location for the Spring configurations
+    We are pointing to the Java Config class that will scan for the rest of
+    the config classes
+    Note: without this the default for Spring is /WEB-INF/applicationContext.xml
+   -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>codesmell.config.Config</param-value>
+  </context-param>
+</web-app>
