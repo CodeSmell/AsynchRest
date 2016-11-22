@@ -22,7 +22,7 @@ Another stores the JSON document
 		PRIMARY KEY ((destination_name, destination_type), trailer, invoice_id));
 
 
-Now we have a scenario where we are searching for a list of invoices and then want to return JSON that contains an array invoice documents. Note: the sample code uses a small JSON representation of an invoice.
+Now we have a scenario where we are searching for a list of invoices and then want to return JSON that contains an array of invoice documents. Note: the sample code uses a small JSON representation of an invoice.
 
 	[
 		{"invoice": {

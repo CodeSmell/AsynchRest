@@ -1,4 +1,4 @@
-package codesmell.invoice.rx;
+package codesmell.invoice.dao.rx;
 
 import static org.junit.Assert.*;
 

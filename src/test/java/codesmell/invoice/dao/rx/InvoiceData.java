@@ -1,4 +1,4 @@
-package codesmell.invoice.rx;
+package codesmell.invoice.dao.rx;
 
 import codesmell.invoice.dao.InvoiceActorType;
 import codesmell.invoice.dao.InvoiceMetaData;
