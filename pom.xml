@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
@@ -6,22 +7,34 @@
   <groupId>codesmell</groupId>
   <artifactId>rx-invoice</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
 
   <properties>
+    <java.version>1.8</java.version>
+    <spring-boot-version>1.5.2.RELEASE</spring-boot-version>
     <rx-version>1.2.1</rx-version>
-    <spring.version>4.2.5.RELEASE</spring.version>
-    <camel.version>2.17.2</camel.version>
-    <slf4j.version>1.7.21</slf4j.version>
-    <logback.version>1.1.7</logback.version>    
   </properties>
 
+  <dependencyManagement>
+    <dependencies>
+      <!-- Spring Boot w/o parent POM -->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot-version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <dependencies>
+    <!-- Spring Boot Web starter -->
     <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-      <version>2.3.3</version>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
+
     <dependency>
       <groupId>com.google.code.findbugs</groupId>
       <artifactId>jsr305</artifactId>
@@ -35,78 +48,22 @@
       <version>${rx-version}</version>
     </dependency>
 
-    <!-- Spring -->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-core</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-web</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
-
-    <!-- Camel -->
-    <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-core</artifactId>
-      <version>${camel.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-spring</artifactId>
-      <version>${camel.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-spring-javaconfig</artifactId>
-      <version>${camel.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-jms</artifactId>
-      <version>${camel.version}</version>
-    </dependency>
-        
-      <!-- Logging dependencies -->
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-api</artifactId>
-        <version>${slf4j.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>jcl-over-slf4j</artifactId>
-        <version>${slf4j.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>ch.qos.logback</groupId>
-        <artifactId>logback-classic</artifactId>
-        <version>${logback.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>ch.qos.logback</groupId>
-        <artifactId>logback-core</artifactId>
-        <version>${logback.version}</version>
-      </dependency>    
-
     <!-- Test -->
     <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-all</artifactId>
-      <version>1.9.5</version>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.jayway.jsonpath</groupId>
       <artifactId>json-path</artifactId>
-      <version>0.9.1</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-all</artifactId>
+      <version>1.9.5</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -123,38 +80,33 @@
     </dependency>
   </dependencies>
 
-
   <build>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.3</version>
         <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
         </configuration>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>3.0.0</version>
+        <!-- repackage a jar or war that is built during the package phase -->
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${spring-boot-version}</version>
         <configuration>
-          <archive>
-            <manifestEntries>
-              <Specification-Title>${project.name}</Specification-Title>
-              <Specification-Version>${project.version}</Specification-Version>
-              <Implementation-Version>${build.number}</Implementation-Version>
-            </manifestEntries>
-          </archive>
+          <executable>true</executable>
+          <mainClass>codesmell.invoice.SpringBootMain</mainClass>
         </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.tomcat.maven</groupId>
-        <artifactId>tomcat7-maven-plugin</artifactId>
-        <version>2.2</version>
-        <configuration>
-          <path>/rx</path>
-        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

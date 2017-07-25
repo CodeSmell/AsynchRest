@@ -10,13 +10,17 @@ public class FooBar implements InitializingBean {
 
     @Value("${hello}")
     private String helloValue;
-    
+
     public FooBar() {
         LOGGER.debug("foo bar!");
     }
-    
+
     @Override
     public void afterPropertiesSet() throws Exception {
         LOGGER.debug("the value of the property hello is:" + helloValue);
+    }
+
+    public String getHello() {
+        return helloValue;
     }
 }
