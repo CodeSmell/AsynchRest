@@ -4,6 +4,14 @@
 
   <modelVersion>4.0.0</modelVersion>
 
+<!--  
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>1.5.3.RELEASE</version>
+  </parent>
+-->
+  
   <groupId>codesmell</groupId>
   <artifactId>rx-invoice</artifactId>
   <version>0.0.1-SNAPSHOT</version>
@@ -11,13 +19,12 @@
 
   <properties>
     <java.version>1.8</java.version>
-    <spring-boot-version>1.5.2.RELEASE</spring-boot-version>
+    <spring-boot-version>1.5.4.RELEASE</spring-boot-version>
     <rx-version>1.2.1</rx-version>
   </properties>
-
+  <!-- Spring Boot w/o parent POM -->
   <dependencyManagement>
     <dependencies>
-      <!-- Spring Boot w/o parent POM -->
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
@@ -34,7 +41,16 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
+    <!-- Spring Boot Test starter -->
+    <!-- Did not work w/o parent POM for 1.5.3.RELEASE -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    
 
+    <!-- JSR 305 annotations -->
     <dependency>
       <groupId>com.google.code.findbugs</groupId>
       <artifactId>jsr305</artifactId>
@@ -49,11 +65,6 @@
     </dependency>
 
     <!-- Test -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <scope>test</scope>
-    </dependency>
     <dependency>
       <groupId>com.jayway.jsonpath</groupId>
       <artifactId>json-path</artifactId>
@@ -75,7 +86,6 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.12</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
