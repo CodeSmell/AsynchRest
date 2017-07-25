@@ -1,4 +1,4 @@
-package codesmell.config;
+package codesmell.invoice.config;
 
 import codesmell.foo.FooBar;
 import org.springframework.context.annotation.Bean;
