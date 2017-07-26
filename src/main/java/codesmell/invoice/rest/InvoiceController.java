@@ -4,9 +4,8 @@ import codesmell.foo.FooBar;
 import codesmell.invoice.dao.InvoiceActorType;
 import codesmell.invoice.dao.InvoiceMetaData;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,11 +34,25 @@ public class InvoiceController {
             path = "/invoice/find",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<InvoiceMetaData>> findInvoice(
+    public List<InvoiceMetaData> findInvoice(
             @RequestParam(value = "storeNumber") String storeNumber,
             @RequestParam(value = "trailerNumber") String trailerNumber) {
 
+        List<InvoiceMetaData> list = this.retrieveInvoices(storeNumber, trailerNumber);
+
+        if (list == null || list.size() == 0) {
+            throw new InvoiceNotFoundException();
+        }
+
+        return list;
+    }
+
+    protected List<InvoiceMetaData> retrieveInvoices(String storeNumber, String trailerNumber) {
         List<InvoiceMetaData> list = new ArrayList<>();
+
+        if (!StringUtils.isEmpty(storeNumber) && storeNumber.equals("NONE")) {
+            throw new InvoiceNotFoundException();
+        }
 
         InvoiceMetaData meta = InvoiceMetaData.builder()
                 .withInternalId(UUID.randomUUID().toString())
@@ -57,7 +70,6 @@ public class InvoiceController {
 
         list.add(meta);
 
-        return new ResponseEntity<>(list, HttpStatus.OK);
+        return list;
     }
-
 }

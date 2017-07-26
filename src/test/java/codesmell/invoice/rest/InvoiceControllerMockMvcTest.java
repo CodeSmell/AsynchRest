@@ -17,9 +17,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = InvoiceController.class)
+@SpringBootTest(classes = {InvoiceController.class, GlobalExceptionHandlerControllerAdvice.class})
 @EnableWebMvc
-@AutoConfigureMockMvc()
+@AutoConfigureMockMvc
 @ContextConfiguration(classes = Config.class)
 public class InvoiceControllerMockMvcTest {
 
@@ -45,6 +45,16 @@ public class InvoiceControllerMockMvcTest {
             .andExpect(jsonPath("$[0].internalId", Matchers.notNullValue()))
             .andExpect(jsonPath("$[0].invoiceDestination.actorName", Matchers.is("100")))
             .andExpect(jsonPath("$[0].trailerNumber", Matchers.is("YT-1300")));
+    }
+
+    @Test
+    public void test_invoice_none() throws Exception {
+        this.mockMvc.perform(get("/invoice/find")
+                .accept(MediaType.APPLICATION_JSON)
+                .param("storeNumber", "NONE")
+                .param("trailerNumber", "YT-1300"))
+            .andExpect(status().isNoContent())
+            .andExpect(content().string(""));
     }
 
 }
