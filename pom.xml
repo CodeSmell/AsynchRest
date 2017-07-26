@@ -48,7 +48,7 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
-    
+
 
     <!-- JSR 305 annotations -->
     <dependency>
