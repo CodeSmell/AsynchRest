@@ -1,4 +1,4 @@
-package codesmell.invoice.rest;
+package codesmell.invoice.rest.spring;
 
 import codesmell.foo.FooBar;
 import codesmell.invoice.dao.InvoiceActorType;

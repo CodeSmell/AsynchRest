@@ -1,4 +1,4 @@
-package codesmell.invoice.rest;
+package codesmell.invoice.rest.spring;
 
 import com.jayway.jsonpath.JsonPath;
 import org.junit.Test;

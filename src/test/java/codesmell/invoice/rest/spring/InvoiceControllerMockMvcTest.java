@@ -1,6 +1,8 @@
-package codesmell.invoice.rest;
+package codesmell.invoice.rest.spring;
 
 import codesmell.invoice.config.Config;
+import codesmell.invoice.rest.spring.GlobalExceptionHandlerControllerAdvice;
+import codesmell.invoice.rest.spring.InvoiceController;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;

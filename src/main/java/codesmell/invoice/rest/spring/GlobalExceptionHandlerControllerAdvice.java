@@ -1,4 +1,4 @@
-package codesmell.invoice.rest;
+package codesmell.invoice.rest.spring;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
