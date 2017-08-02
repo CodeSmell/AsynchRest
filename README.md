@@ -1,6 +1,7 @@
 # Asynch REST
 Examine Spring MVC & Jersey as REST API framework within Spring Boot
-Play with various asynchronous options 
+
+Playing with various asynchronous options 
 
 ## Using Jersey as JAX-RS provider instead of Spring MVC
 Typically a Spring Boot application will use the web starter, which sets up the container for Spring MVC REST development.
