@@ -1,15 +1,12 @@
 package codesmell.invoice.rest.spring;
 
-import codesmell.foo.FooBar;
 import codesmell.invoice.dao.InvoiceActorType;
 import codesmell.invoice.dao.InvoiceMetaData;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -18,17 +15,6 @@ import java.util.UUID;
 
 @RestController
 public class InvoiceController {
-
-    @Autowired
-    FooBar foobar;
-
-    @RequestMapping(
-            path = "/foo",
-            method = RequestMethod.GET)
-    @ResponseBody
-    public String fooBar() {
-        return "Hello " + foobar.getHello();
-    }
 
     @RequestMapping(
             path = "/invoice/find",

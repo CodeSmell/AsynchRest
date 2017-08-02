@@ -2,13 +2,11 @@ package codesmell.invoice.config;
 
 import codesmell.foo.FooBar;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 @Configuration
-@ComponentScan(basePackages = { "codesmell.config" })
 @PropertySource(value = { "classpath:config.props" })
 public class Config {
 
@@ -19,10 +17,10 @@ public class Config {
     public static PropertySourcesPlaceholderConfigurer propertyConfig() {
         return new PropertySourcesPlaceholderConfigurer();
     }
-    
+
     @Bean
     public FooBar doFooBar() {
         return new FooBar();
     }
-    
+
 }

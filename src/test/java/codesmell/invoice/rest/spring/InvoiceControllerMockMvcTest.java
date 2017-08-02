@@ -1,8 +1,6 @@
 package codesmell.invoice.rest.spring;
 
 import codesmell.invoice.config.Config;
-import codesmell.invoice.rest.spring.GlobalExceptionHandlerControllerAdvice;
-import codesmell.invoice.rest.spring.InvoiceController;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,13 +25,6 @@ public class InvoiceControllerMockMvcTest {
 
     @Autowired
     private MockMvc mockMvc;
-
-    @Test
-    public void test_foobar_hello() throws Exception {
-        this.mockMvc.perform(get("/foo"))
-            .andExpect(status().isOk())
-            .andExpect(content().string("Hello world"));
-    }
 
     @Test
     public void test_invoice() throws Exception {

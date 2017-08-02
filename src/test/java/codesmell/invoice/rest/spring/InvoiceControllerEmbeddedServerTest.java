@@ -31,14 +31,6 @@ public class InvoiceControllerEmbeddedServerTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    public void test_foobar_hello() throws Exception {
-        String uri = "http://localhost:" + port + "/foo";
-        String responseText = restTemplate.getForObject(uri, String.class);
-        assertNotNull(responseText);
-        assertEquals("Hello world", responseText);
-    }
-
-    @Test
     public void test_invoice() throws Exception {
         String uri = "http://localhost:" + port + "/invoice/find?storeNumber={storeNum}&trailerNumber={trailerNum}";
 
