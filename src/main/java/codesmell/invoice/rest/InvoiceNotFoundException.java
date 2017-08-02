@@ -1,4 +1,4 @@
-package codesmell.invoice.rest.spring;
+package codesmell.invoice.rest;
 
 public class InvoiceNotFoundException extends RuntimeException {
     public InvoiceNotFoundException() {

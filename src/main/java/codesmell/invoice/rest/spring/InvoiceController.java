@@ -2,6 +2,7 @@ package codesmell.invoice.rest.spring;
 
 import codesmell.invoice.dao.InvoiceActorType;
 import codesmell.invoice.dao.InvoiceMetaData;
+import codesmell.invoice.rest.InvoiceNotFoundException;
 import org.springframework.http.MediaType;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;

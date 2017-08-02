@@ -1,5 +1,6 @@
 package codesmell.invoice.rest.spring;
 
+import codesmell.invoice.rest.InvoiceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;

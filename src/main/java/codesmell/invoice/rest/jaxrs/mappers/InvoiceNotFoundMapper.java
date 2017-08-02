@@ -1,6 +1,6 @@
 package codesmell.invoice.rest.jaxrs.mappers;
 
-import codesmell.invoice.rest.spring.InvoiceNotFoundException;
+import codesmell.invoice.rest.InvoiceNotFoundException;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.core.Response;
