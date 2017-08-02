@@ -7,16 +7,15 @@ Typically a Spring Boot application will use the web starter, which sets up the 
 
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-jersey</artifactId>
+      <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
 
-Switch that starter out for the following Jersey one
+Switch that starter out for the following Jersey one (or in our case leave them both in, since we are comparing them)
 
     <dependency>
-      <groupId>org.apache.cxf</groupId>
-      <artifactId>cxf-spring-boot-starter-jaxrs</artifactId>
-      <version>3.1.10</version>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-jersey</artifactId>
     </dependency>
 
 ## Invoice Data
@@ -53,6 +52,6 @@ Now we have a scenario where we are searching for a list of invoices and then wa
 		}
 	]
 
-Sample code does this with
+Sample code in `src/main/test` does this with
 * Java 8 Streams
 * RxJava Observable
