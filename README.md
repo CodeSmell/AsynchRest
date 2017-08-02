@@ -1,4 +1,4 @@
-# rxjava
+# Asynch REST
 
 Imagine that we are storing invoices in an Apache Cassandra database.
 
