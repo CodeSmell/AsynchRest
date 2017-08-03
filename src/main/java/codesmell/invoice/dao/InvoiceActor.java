@@ -1,14 +1,14 @@
 package codesmell.invoice.dao;
 
-import java.util.function.Consumer;
-
 import javax.annotation.concurrent.Immutable;
+
+import java.util.function.Consumer;
 
 @Immutable
 public final class InvoiceActor {
 
 	private String actorName;
-	private InvoiceActorType actorType;
+	private String actorType;
 
 	/**
 	 * static factory method for builder
@@ -27,7 +27,7 @@ public final class InvoiceActor {
 		return actorName;
 	}
 
-	public InvoiceActorType getActorType() {
+	public String getActorType() {
 		return actorType;
 	}
 
@@ -49,7 +49,7 @@ public final class InvoiceActor {
 			return this;
 		}
 
-		public Builder as(InvoiceActorType type) {
+		public Builder as(String type) {
 			managedInstance.actorType = type;
 			return this;
 		}

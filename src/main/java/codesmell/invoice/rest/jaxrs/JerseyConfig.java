@@ -11,7 +11,8 @@ public class JerseyConfig extends ResourceConfig {
 
     public JerseyConfig() {
         register(HelloJerseyController.class);
-        register(AsynchInvoiceController.class);
+        register(JaxRsInvoiceController.class);
+        register(JaxRsAsynchInvoiceController.class);
         packages("codesmell.invoice.rest.jaxrs.mappers");
     }
 }
