@@ -13,7 +13,7 @@ public class InvoiceNotFoundMapper implements ExceptionMapper<InvoiceNotFoundExc
 
     @Override
     public Response toResponse(InvoiceNotFoundException e) {
-        return Response.status(Response.Status.BAD_REQUEST).build();
+        return Response.status(Response.Status.NO_CONTENT).entity("").build();
     }
 
 }
