@@ -25,7 +25,6 @@ import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.*;
@@ -39,11 +38,11 @@ public class JaxRsAsynchInvoiceControllerTest {
 
     private final String INVOICE_PATH = "/invoice/find/async";
 
-    @MockBean
-    InvoiceDao mockDao;
-
     @LocalServerPort
     int port;
+
+    @MockBean
+    InvoiceDao mockDao;
 
     @After
     public void cleanup() {
@@ -51,7 +50,7 @@ public class JaxRsAsynchInvoiceControllerTest {
     }
 
     @Test
-    public void test_async_find_invoice_jaxrsClient() throws InterruptedException, ExecutionException {
+    public void test_find_invoice_jaxrsClient() throws InterruptedException, ExecutionException {
         List<InvoiceMetaData> daoPackList = new ArrayList<>();
         daoPackList.add(InvoiceMetaData.builder().withInternalId("UUID-1").shippingOnTrailer(trailerNum).build());
         daoPackList.add(InvoiceMetaData.builder().withInternalId("UUID-2").shippingOnTrailer(trailerNum).build());
@@ -70,14 +69,13 @@ public class JaxRsAsynchInvoiceControllerTest {
         WebTarget webTarget = jaxRsClient.target("http://localhost:" + port + "/jaxrs");
         WebTarget helloTarget = webTarget.path(INVOICE_PATH);
 
-        Future<Response> responseFuture = helloTarget
+        Response response = helloTarget
             .queryParam("storeNumber", storeNum)
+            .queryParam("trailerNumber", trailerNum)
             .request()
             .accept(MediaType.APPLICATION_JSON)
-            .async()
             .get();
 
-        Response response = responseFuture.get();
         assertEquals(200, response.getStatus());
         DocumentContext dc = JsonPath.parse(response.readEntity(String.class));
         assertEquals(new Integer(3), dc.read("$.length()"));
@@ -86,49 +84,45 @@ public class JaxRsAsynchInvoiceControllerTest {
     }
 
     @Test
-    public void test_async_find_invoice_jaxrsClient_not_found() throws InterruptedException, ExecutionException {
+    public void test_find_invoice_jaxrsClient_not_found() throws InterruptedException, ExecutionException {
         when(mockDao.findInvoiceByDestination(any(), any())).thenReturn(new ArrayList<InvoiceMetaData>());
 
         Client jaxRsClient = ClientBuilder.newClient();
         WebTarget webTarget = jaxRsClient.target("http://localhost:" + port + "/jaxrs");
         WebTarget helloTarget = webTarget.path(INVOICE_PATH);
 
-        Future<Response> responseFuture = helloTarget
+        Response response = helloTarget
             .queryParam("storeNumber", storeNum)
             .queryParam("trailerNumber", trailerNum)
             .request()
             .accept(MediaType.APPLICATION_JSON)
-            .async()
             .get();
 
-        Response response = responseFuture.get();
         assertEquals(204, response.getStatus());
         assertEquals("", response.readEntity(String.class));
     }
 
     @Test
-    public void test_async_find_invoice_jaxrsClient_dao_exception() throws InterruptedException, ExecutionException {
+    public void test_find_invoice_jaxrsClient_dao_exception() throws InterruptedException, ExecutionException {
         when(mockDao.findInvoiceByDestination(any(), any())).thenThrow(new InvoiceDaoException());
 
         Client jaxRsClient = ClientBuilder.newClient();
         WebTarget webTarget = jaxRsClient.target("http://localhost:" + port + "/jaxrs");
         WebTarget helloTarget = webTarget.path(INVOICE_PATH);
 
-        Future<Response> responseFuture = helloTarget
+        Response response = helloTarget
             .queryParam("storeNumber", storeNum)
             .queryParam("trailerNumber", trailerNum)
             .request()
             .accept(MediaType.APPLICATION_JSON)
-            .async()
             .get();
 
-        Response response = responseFuture.get();
         assertEquals(500, response.getStatus());
         assertEquals("", response.readEntity(String.class));
     }
 
     @Test
-    public void test_async_find_invoice_jaxrsClient_dao_pack_exception() throws InterruptedException, ExecutionException {
+    public void test_find_invoice_jaxrsClient_dao_pack_exception() throws InterruptedException, ExecutionException {
         List<InvoiceMetaData> daoPackList = new ArrayList<>();
         daoPackList.add(InvoiceMetaData.builder().withInternalId("UUID-1").shippingOnTrailer(trailerNum).build());
         daoPackList.add(InvoiceMetaData.builder().withInternalId("UUID-2").shippingOnTrailer(trailerNum).build());
@@ -141,16 +135,15 @@ public class JaxRsAsynchInvoiceControllerTest {
         WebTarget webTarget = jaxRsClient.target("http://localhost:" + port + "/jaxrs");
         WebTarget helloTarget = webTarget.path(INVOICE_PATH);
 
-        Future<Response> responseFuture = helloTarget
+        Response response = helloTarget
             .queryParam("storeNumber", storeNum)
             .queryParam("trailerNumber", trailerNum)
             .request()
             .accept(MediaType.APPLICATION_JSON)
-            .async()
             .get();
 
-        Response response = responseFuture.get();
         assertEquals(500, response.getStatus());
         assertEquals("", response.readEntity(String.class));
     }
+
 }

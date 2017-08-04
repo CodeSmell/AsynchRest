@@ -6,6 +6,8 @@ import codesmell.invoice.dao.InvoiceDaoException;
 import codesmell.invoice.dao.InvoiceMetaData;
 import codesmell.invoice.dao.Pack;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
@@ -14,6 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class SlowInvoiceDao implements InvoiceDao {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SlowInvoiceDao.class);
 
     @Autowired
     ObjectMapper jsonMapper;
@@ -23,6 +26,7 @@ public class SlowInvoiceDao implements InvoiceDao {
         List<InvoiceMetaData> list = new ArrayList<>();
 
         String storeNumber = (dest != null ? dest.getActorName() : "");
+        LOGGER.debug("finding packs for store (" + storeNumber + ") and trailer (" + trailer + ")");
 
         int count = 0;
         while (count < 5) {
@@ -38,10 +42,12 @@ public class SlowInvoiceDao implements InvoiceDao {
     }
 
     @Override
-    public String retrieveInvoiceDocumentByIdentifier(String invoiceId) {
+    public String retrieveInvoiceDocumentByIdentifier(String packId) {
+        LOGGER.debug("retrieving pack for id (" + packId + ")");
+
         try {
             Pack pack = Pack.builder()
-                .identifiedBy(invoiceId)
+                .identifiedBy(packId)
                 .packNumber("pack")
                 .beingTransportedOn("trailer")
                 .suppliedBy("Marvel", "DC")
