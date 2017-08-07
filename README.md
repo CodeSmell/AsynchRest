@@ -18,8 +18,41 @@ Switch that starter out for the following Jersey one (or in our case leave them 
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-jersey</artifactId>
     </dependency>
+    
+### Issue w/ Jersey and Spring Boot
+[Jersey doesn't always work with Spring Boot fat jars (1468)](https://github.com/spring-projects/spring-boot/issues/1468)   
 
-## Invoice Data
+This issue presented when adding the `packages()` to `JerseyConfig`  
+
+	@Configuration
+	@ApplicationPath("/jaxrs")
+	public class JerseyConfig extends ResourceConfig {
+	
+	    public JerseyConfig() {
+	        register(HelloJerseyController.class);
+	        register(JaxRsInvoiceController.class);
+	        register(JaxRsAsynchInvoiceController.class);
+	        //packages("codesmell.invoice.rest.jaxrs.mappers");
+	    }
+	}
+	
+To get around it the `ExceptionMapper` classes were registered directly.	
+
+## building and running the application
+
+The simulator can be run from Maven command line:
+
+    mvn spring-boot:run
+    
+It can also be built and run as a "fat jar"
+
+    mvn package spring-boot:repackage
+    
+This builds the JAR file that contains all of the dependencies, including the container.
+    
+    java -jar target/rx-invoice-[version].jar
+
+## The scenario being solved 
 Imagine that we are storing invoices in an Apache Cassandra database.
 
 Assume a keyspace that has two tables. 
