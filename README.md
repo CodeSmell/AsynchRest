@@ -76,19 +76,19 @@ This builds the JAR file that contains all of the dependencies, including the co
 Imagine that we are storing invoices in an Apache Cassandra database.
 
 Assume a keyspace that has two tables. 
-One allows queries by the destination of the invoice items and trailer
+One allows queries to retrieve all of the invoices going to the same place and on the same trailer.
 
-	CREATE TABLE IF NOT EXISTS "invoice_doc" (
-		invoice_id TIMEUUID,
+	CREATE TABLE IF NOT EXISTS "invoices_by_destination" (
+		invoice_id TEXT,
 		destination_name TEXT,
 		destination_type TEXT,
 		trailer TEXT,
 		PRIMARY KEY ((destination_name, destination_type), trailer, invoice_id));
 
-Another stores the JSON document
+Another stores the JSON document with all of the details for a single invoice.
 	
-	CREATE TABLE IF NOT EXISTS "invoice_by_destination" (
-		invoice_id TIMEUUID,
+	CREATE TABLE IF NOT EXISTS "invoice_detail" (
+		invoice_id TEXT,
 		json_doc TEXT,
 		PRIMARY KEY ((invoice_id)));	
 
