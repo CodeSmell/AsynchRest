@@ -31,9 +31,19 @@ public class SlowInvoiceDao implements InvoiceDao {
         int count = 0;
         while (count < 5) {
             count++;
-            InvoiceMetaData meta = InvoiceMetaData.builder().withInternalId(UUID.randomUUID().toString())
-                    .withDocumentNumber(new Double(Math.random()).toString()).shippingOnTrailer(trailer).suppliedBy().named("Marvel").as("DC").end()
-                    .beingSentTo().named(storeNumber).as("STORE").end().build();
+            InvoiceMetaData meta = InvoiceMetaData.builder()
+            		.withInternalId(UUID.randomUUID().toString())
+                .withDocumentNumber(new Double(Math.random()).toString())
+            		.shippingOnTrailer(trailer)
+            		.suppliedBy()
+            			.named("Marvel")
+            			.as("DC")
+            		.end()
+                .beingSentTo()
+                		.named(storeNumber)
+                		.as("STORE")
+            		.end()
+            		.build();
 
             list.add(meta);
         }

@@ -16,6 +16,13 @@ Jersey/JAX-RS will run using the following URL path
 	
 	localhost:8888/jaxrs/invoice/find/?storeNumber=100&trailerNumber=1
 
+### Testing stream
+In order to see the stream in action, update the `SlowInvoiceDao` so that it returns 5000 invoices. Also update the `Thread.sleep` to 100 ms.
+
+	curl localhost:8888/jaxrs/invoice/find/stream?storeNumber=100
+
+The resulting array of JSON objects will start to be returned before the method has completed.
+	
 ## Using Jersey as JAX-RS provider instead of Spring MVC
 Typically a Spring Boot application will use the web starter, which sets up the container for Spring MVC REST development.
 
