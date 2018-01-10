@@ -1,4 +1,4 @@
-package codesmell.invoice.rest.spring;
+package codesmell.invoice.rest.spring.hello;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +23,7 @@ public class HelloSpringControllerEmbeddedServerTest {
 
     @Test
     public void test_foobar_hello() throws Exception {
-        String uri = "http://localhost:" + port + "/foo";
+        String uri = "http://localhost:" + port + "/springmvc/hello";
         String responseText = restTemplate.getForObject(uri, String.class);
         assertNotNull(responseText);
         assertEquals("Hello world from Spring MVC", responseText);

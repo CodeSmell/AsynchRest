@@ -1,4 +1,4 @@
-package codesmell.invoice.rest.jaxrs;
+package codesmell.invoice.rest.jaxrs.sync;
 
 import codesmell.invoice.dao.InvoiceActor;
 import codesmell.invoice.dao.InvoiceDao;

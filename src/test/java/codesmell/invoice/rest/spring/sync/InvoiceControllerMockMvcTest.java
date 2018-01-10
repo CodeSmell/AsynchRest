@@ -1,10 +1,13 @@
-package codesmell.invoice.rest.spring;
+package codesmell.invoice.rest.spring.sync;
 
 import codesmell.invoice.config.Config;
 import codesmell.invoice.config.DaoConfig;
 import codesmell.invoice.dao.InvoiceDao;
 import codesmell.invoice.dao.InvoiceDaoException;
 import codesmell.invoice.dao.InvoiceMetaData;
+import codesmell.invoice.rest.spring.GlobalExceptionHandlerControllerAdvice;
+import codesmell.invoice.rest.spring.sync.InvoiceController;
+
 import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Test;
@@ -36,6 +39,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ContextConfiguration(classes = { Config.class, DaoConfig.class })
 public class InvoiceControllerMockMvcTest {
 
+	private static final String BASE_URL = "/springmvc/invoice/find";
+	
     @Autowired
     private MockMvc mockMvc;
 
@@ -63,7 +68,7 @@ public class InvoiceControllerMockMvcTest {
             }
         });
 
-        this.mockMvc.perform(get("/invoice/find")
+        this.mockMvc.perform(get(BASE_URL)
                 .accept(MediaType.APPLICATION_JSON)
                 .param("storeNumber", "100")
                 .param("trailerNumber", "YT-1300"))
@@ -78,7 +83,7 @@ public class InvoiceControllerMockMvcTest {
 
         when(mockDao.findInvoiceByDestination(any(), any())).thenReturn(new ArrayList<InvoiceMetaData>());
 
-        this.mockMvc.perform(get("/invoice/find")
+        this.mockMvc.perform(get(BASE_URL)
                 .accept(MediaType.APPLICATION_JSON)
                 .param("storeNumber", "100")
                 .param("trailerNumber", "YT-1300"))
@@ -91,7 +96,7 @@ public class InvoiceControllerMockMvcTest {
 
         when(mockDao.findInvoiceByDestination(any(), any())).thenThrow(new InvoiceDaoException());
 
-        this.mockMvc.perform(get("/invoice/find")
+        this.mockMvc.perform(get(BASE_URL)
                 .accept(MediaType.APPLICATION_JSON)
                 .param("storeNumber", "100")
                 .param("trailerNumber", "YT-1300"))

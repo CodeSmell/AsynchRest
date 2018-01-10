@@ -1,6 +1,9 @@
-package codesmell.invoice.rest.spring;
+package codesmell.invoice.rest.spring.hello;
 
 import codesmell.invoice.config.Config;
+import codesmell.invoice.rest.spring.GlobalExceptionHandlerControllerAdvice;
+import codesmell.invoice.rest.spring.hello.HelloSpringController;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +29,7 @@ public class HelloSpringControllerMockMvcTest {
 
     @Test
     public void test_foobar_hello() throws Exception {
-        this.mockMvc.perform(get("/foo"))
+        this.mockMvc.perform(get("/springmvc/hello"))
             .andExpect(status().isOk())
             .andExpect(content().string("Hello world from Spring MVC"));
     }

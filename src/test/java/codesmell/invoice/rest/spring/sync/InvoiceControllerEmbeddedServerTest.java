@@ -1,4 +1,4 @@
-package codesmell.invoice.rest.spring;
+package codesmell.invoice.rest.spring.sync;
 
 import codesmell.invoice.dao.InvoiceDao;
 import codesmell.invoice.dao.InvoiceMetaData;
@@ -35,6 +35,8 @@ import static org.mockito.Mockito.*;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class InvoiceControllerEmbeddedServerTest {
 
+	private static final String BASE_URL = "/springmvc/invoice/find";
+	
     @LocalServerPort
     private int port;
 
@@ -68,7 +70,7 @@ public class InvoiceControllerEmbeddedServerTest {
         String storeNum = "100";
         String trailerNum = "YT-1300";
 
-        String uri = "http://localhost:" + port + "/invoice/find?storeNumber={storeNum}&trailerNumber={trailerNum}";
+        String uri = "http://localhost:" + port + BASE_URL + "?storeNumber={storeNum}&trailerNumber={trailerNum}";
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
@@ -89,7 +91,7 @@ public class InvoiceControllerEmbeddedServerTest {
 
         when(mockDao.findInvoiceByDestination(any(), any())).thenReturn(new ArrayList<InvoiceMetaData>());
 
-        String uri = "http://localhost:" + port + "/invoice/find?storeNumber={storeNum}&trailerNumber={trailerNum}";
+        String uri = "http://localhost:" + port + BASE_URL + "?storeNumber={storeNum}&trailerNumber={trailerNum}";
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));

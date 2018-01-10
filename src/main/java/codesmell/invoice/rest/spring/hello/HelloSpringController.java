@@ -1,4 +1,4 @@
-package codesmell.invoice.rest.spring;
+package codesmell.invoice.rest.spring.hello;
 
 import codesmell.foo.FooBar;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ public class HelloSpringController {
     FooBar foobar;
 
     @RequestMapping(
-            path = "/foo",
+            path = "/springmvc/hello",
             method = RequestMethod.GET,
             produces = MediaType.TEXT_PLAIN_VALUE)
     @ResponseBody

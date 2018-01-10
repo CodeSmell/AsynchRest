@@ -3,6 +3,19 @@ Examine Spring MVC & Jersey as REST API framework within Spring Boot
 
 Playing with various asynchronous & parallel processing options
 
+## Running the examples
+Spring MVC will run using the following URL path
+	
+	localhost:8888/springmvc/hello
+	
+	localhost:8888/springmvc/invoice/find/?storeNumber=100&trailerNumber=1
+
+Jersey/JAX-RS will run using the following URL path
+	
+	localhost:8888/jaxrs/hello
+	
+	localhost:8888/jaxrs/invoice/find/?storeNumber=100&trailerNumber=1
+
 ## Using Jersey as JAX-RS provider instead of Spring MVC
 Typically a Spring Boot application will use the web starter, which sets up the container for Spring MVC REST development.
 
@@ -86,6 +99,3 @@ Now we have a scenario where we are searching for a list of invoices and then wa
 		}
 	]
 
-Sample code in `src/main/test` does this with
-* Java 8 Streams
-* RxJava Observable

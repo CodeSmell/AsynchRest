@@ -1,4 +1,4 @@
-package codesmell.invoice.rest.jaxrs;
+package codesmell.invoice.rest.jaxrs.async;
 
 import codesmell.invoice.dao.InvoiceDao;
 import codesmell.invoice.dao.InvoiceDaoException;

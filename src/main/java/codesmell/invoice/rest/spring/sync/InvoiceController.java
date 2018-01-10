@@ -1,4 +1,4 @@
-package codesmell.invoice.rest.spring;
+package codesmell.invoice.rest.spring.sync;
 
 import codesmell.invoice.dao.InvoiceActor;
 import codesmell.invoice.dao.InvoiceDao;
@@ -23,7 +23,7 @@ public class InvoiceController {
     private InvoiceDao dao;
 
     @RequestMapping(
-            path = "/invoice/find",
+            path = "/springmvc/invoice/find",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public String findInvoice(

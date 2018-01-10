@@ -1,4 +1,4 @@
-package codesmell.invoice.rest.jaxrs;
+package codesmell.invoice.rest.jaxrs.hello;
 
 import codesmell.foo.FooBar;
 import org.springframework.beans.factory.annotation.Autowired;

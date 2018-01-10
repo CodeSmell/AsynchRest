@@ -1,4 +1,4 @@
-package codesmell.invoice.rest.jaxrs;
+package codesmell.invoice.rest.jaxrs.hello;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

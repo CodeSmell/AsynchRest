@@ -1,8 +1,12 @@
 package codesmell.invoice.rest.jaxrs;
 
+import codesmell.invoice.rest.jaxrs.async.JaxRsAsynchInvoiceController;
+import codesmell.invoice.rest.jaxrs.hello.HelloJerseyController;
 import codesmell.invoice.rest.jaxrs.mappers.InvoiceDaoExceptionMapper;
 import codesmell.invoice.rest.jaxrs.mappers.InvoiceNotFoundMapper;
 import codesmell.invoice.rest.jaxrs.mappers.MissingRequiredParameterMapper;
+import codesmell.invoice.rest.jaxrs.sync.JaxRsInvoiceController;
+
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.context.annotation.Configuration;
 
