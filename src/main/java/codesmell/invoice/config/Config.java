@@ -5,6 +5,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -14,6 +19,9 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 @PropertySource(value = { "classpath:config.props" })
 public class Config {
 
+    @Value("${fixed.thread.pool.size}")
+    private Integer threadPoolSize;
+    
     /**
      * used by Spring to resolve @Value configuration
      */
@@ -35,6 +43,11 @@ public class Config {
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
             .setSerializationInclusion(JsonInclude.Include.NON_NULL)
             .configure(SerializationFeature.INDENT_OUTPUT, false);
+    }
+    
+    @Bean
+    public ExecutorService buildExecutiveService() {
+        return Executors.newFixedThreadPool(threadPoolSize);
     }
 
 }

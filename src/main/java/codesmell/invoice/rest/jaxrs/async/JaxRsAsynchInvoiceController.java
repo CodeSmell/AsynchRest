@@ -55,16 +55,16 @@ public class JaxRsAsynchInvoiceController {
 
         LOGGER.debug("asynch find.invoice() : start");
 
-        // set the time out
-        asyncResponse.setTimeout(10, TimeUnit.SECONDS);
-        asyncResponse.setTimeoutHandler(ar -> ar.resume(Response.status(Response.Status.REQUEST_TIMEOUT).build()));
-
         // retrieve the list of packs for the store/trailer
         List<InvoiceMetaData> list = this.retrieveInvoices(storeNumber, trailerNumber);
 
         if (list == null || list.size() == 0) {
             throw new InvoiceNotFoundException();
         } else {
+            // set the time out
+            asyncResponse.setTimeout(10, TimeUnit.SECONDS);
+            asyncResponse.setTimeoutHandler(ar -> ar.resume(Response.status(Response.Status.REQUEST_TIMEOUT).build()));
+            
             // asynchronously process the list of packs
             List<CompletableFuture<String>> packJsonFutures =
                     list.stream()

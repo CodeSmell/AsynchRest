@@ -1,1 +1,2 @@
 hello=world
+fixed.thread.pool.size=10
